@@ -674,14 +674,11 @@ else ifeq ($(HOST_OS),Haiku)
   LDFLAGS := $(BACKEND_LDFLAGS) -no-pie
 
 else
-#  ifneq (,$(findstring ppc64,$(machine)))
-#  LDFLAGS := $(BITS) -mcpu=native -lm $(BACKEND_LDFLAGS) -lpthread -ldl
-#  endif
-#  ifneq (,$(findstring powerpc,$(machine)))
-#  LDFLAGS := $(BITS) -mcpu=native -lm $(BACKEND_LDFLAGS) -lpthread -ldl
-#  endif
-#  LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -lpthread -ldl
-  LDFLAGS := $(BITS) -mcpu=native -lm $(BACKEND_LDFLAGS) -lpthread -ldl
+ifeq ($(TARGET_ARCH),powerpc)
+  LDFLAGS := $(BITS) -mcpu=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -lpthread -ldl
+else
+  LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -lpthread -ldl
+endif
   ifeq ($(NO_PIE), 1)
     LDFLAGS += -no-pie
   endif
