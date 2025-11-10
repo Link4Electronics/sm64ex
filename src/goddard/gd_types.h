@@ -30,7 +30,7 @@ union DynUnion {
 #if IS_BIG_ENDIAN && IS_64_BIT
     s64 word;
 #else
-     s32 word;
+    s32 word;
 #endif
 };
 
