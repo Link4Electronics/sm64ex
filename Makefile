@@ -675,9 +675,9 @@ else ifeq ($(HOST_OS),Haiku)
 
 else ifeq (,$(findstring powerpc,$(machine)))
   LDFLAGS := $(BITS) -mcpu=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -lpthread -ldl
+
 else
   LDFLAGS := $(BITS) -march=$(TARGET_ARCH) -lm $(BACKEND_LDFLAGS) -lpthread -ldl
-endif
   ifeq ($(NO_PIE), 1)
     LDFLAGS += -no-pie
   endif
